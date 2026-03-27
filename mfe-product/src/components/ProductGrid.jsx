@@ -1,7 +1,7 @@
-import React from 'react';
-import eventBus from 'shared/eventBus';
-import PRODUCTS from 'shared/products';
-import './ProductGrid.css';
+import React from "react";
+import eventBus from "shared/eventBus";
+import PRODUCTS from "shared/products";
+import "./ProductGrid.css";
 
 function ProductCard({ product, onAdd }) {
   return (
@@ -21,13 +21,14 @@ function ProductCard({ product, onAdd }) {
 function ProductGrid() {
   const handleAdd = (product) => {
     // TODO: notifier le reste de l'application qu'un produit a ete ajoute
+    eventBus.emit("add-product", product);
   };
 
   return (
     <div className="product-grid">
       <h2>Catalogue</h2>
       <div className="grid">
-        {PRODUCTS.map(p => (
+        {PRODUCTS.map((p) => (
           <ProductCard key={p.id} product={p} onAdd={handleAdd} />
         ))}
       </div>

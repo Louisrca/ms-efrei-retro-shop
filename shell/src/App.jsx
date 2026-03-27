@@ -1,12 +1,10 @@
 import React, { useState, useEffect, Suspense, lazy } from "react";
+import eventBus from "shared/eventBus";
 import "./App.css";
 
 // TODO: importer les 3 MFEs avec React.lazy()
-const MfeProduct = lazy(() => import("mfeProduct/ProductList"));
+const MfeProduct = lazy(() => import("mfeProduct/ProductGrid"));
 const MfeCart = lazy(() => import("mfeCart/Cart"));
-const MfeRecommendations = lazy(
-  () => import("mfeRecommendations/Recommendations"),
-);
 
 function LoadingFallback({ name }) {
   return <div className="loading-fallback">Chargement {name}...</div>;
@@ -14,32 +12,17 @@ function LoadingFallback({ name }) {
 
 function App() {
   const [cartCount, setCartCount] = useState(0);
+  console.log("🚀 ~ App ~ cartCount:", cartCount);
 
   useEffect(() => {
     // TODO: ecouter les mises a jour du panier pour le badge
-    const onAddProduct = (e) => {
-      console.log("Produits reçus :", e.detail);
-    };
+    eventBus.on("add-product", () => {
+      setCartCount((count) => count + 1);
+    });
 
-    const onTotalCart = (e) => {
-      console.log("Total panier :", e.detail);
-      setCartCount(e.detail);
-    };
-
-    const onDeleteCart = () => {
-      console.log("Panier supprimé");
+    eventBus.on("remove-cart", () => {
       setCartCount(0);
-    };
-
-    window.addEventListener("add-product", onAddProduct);
-    window.addEventListener("total-cart", onTotalCart);
-    window.addEventListener("delete-cart", onDeleteCart);
-
-    return () => {
-      window.removeEventListener("add-product", onAddProduct);
-      window.removeEventListener("total-cart", onTotalCart);
-      window.removeEventListener("delete-cart", onDeleteCart);
-    };
+    });
   }, []);
 
   return (
@@ -62,12 +45,6 @@ function App() {
           </Suspense>
         </aside>
       </main>
-      <section className="reco-area">
-        {/* TODO: afficher mfe-reco avec Suspense */}
-        <Suspense fallback={<LoadingFallback name="Recommendations" />}>
-          <MfeRecommendations />
-        </Suspense>
-      </section>
     </div>
   );
 }

@@ -37,10 +37,14 @@ module.exports = {
   plugins: [
     new ModuleFederationPlugin({
       // TODO: configurer ce MFE pour exposer le composant ProductGrid
-      name: "mfe_product",
+      name: "mfeProduct",
       filename: "remoteEntry.js",
       exposes: {
         "./ProductGrid": "./src/components/ProductGrid",
+      },
+      shared: {
+        react: { singleton: true, requiredVersion: "^18.2.0" },
+        "react-dom": { singleton: true, requiredVersion: "^18.2.0" },
       },
     }),
     new HtmlWebpackPlugin({
