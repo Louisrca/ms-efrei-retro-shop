@@ -20,7 +20,7 @@ Equipe de 3 : ignorer mfe-reco.
 | badge panier|      //   |  //
 
 
-~~Etudiant D : mfe-reco -- configurer webpack MF, ecouter le panier, adapter les recos~~
+Etudiant D : mfe-reco -- configurer webpack MF, ecouter le panier, adapter les recos
 
 # Phase 1 -- Negociation (10 min)
 
