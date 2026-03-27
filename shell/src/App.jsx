@@ -20,8 +20,12 @@ function App() {
       setCartCount((count) => count + 1);
     });
 
-    eventBus.on("remove-cart", () => {
+    eventBus.on("clear-cart", () => {
       setCartCount(0);
+    });
+
+    eventBus.on("remove-cart", () => {
+      setCartCount((count) => Math.max(0, count - 1));
     });
   }, []);
 
