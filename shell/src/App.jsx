@@ -1,10 +1,12 @@
-import React, { useState, useEffect, Suspense, lazy } from 'react';
-import './App.css';
+import React, { useState, useEffect, Suspense, lazy } from "react";
+import "./App.css";
 
 // TODO: importer les 3 MFEs avec React.lazy()
-const MfeProduct = lazy(() => import('mfeProduct/ProductList'));
-const MfeCart = lazy(() => import('mfeCart/Cart'));
-const MfeRecommendations = lazy(() => import('mfeRecommendations/Recommendations'));
+const MfeProduct = lazy(() => import("mfeProduct/ProductList"));
+const MfeCart = lazy(() => import("mfeCart/Cart"));
+const MfeRecommendations = lazy(
+  () => import("mfeRecommendations/Recommendations"),
+);
 
 function LoadingFallback({ name }) {
   return <div className="loading-fallback">Chargement {name}...</div>;
@@ -15,12 +17,26 @@ function App() {
 
   useEffect(() => {
     // TODO: ecouter les mises a jour du panier pour le badge
-    const handleCartUpdate = (newCount) => {
-      setCartCount(newCount);
+    const onAddProduct = (e) => {
+      console.log("Produits reçus :", e.detail);
     };
-    window.addEventListener('cartUpdate', handleCartUpdate);
+
+    const onTotalCart = (e) => {
+      console.log("Total panier :", e.detail);
+    };
+
+    const onDeleteCart = (e) => {
+      console.log("Panier supprimé");
+    };
+
+    window.addEventListener("add-product", onAddProduct);
+    window.addEventListener("total-cart", onTotalCart);
+    window.addEventListener("delete-cart", onDeleteCart);
+
     return () => {
-      window.removeEventListener('cartUpdate', handleCartUpdate);
+      window.removeEventListener("add-product", onAddProduct);
+      window.removeEventListener("total-cart", onTotalCart);
+      window.removeEventListener("delete-cart", onDeleteCart);
     };
   }, []);
 
