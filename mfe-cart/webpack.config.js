@@ -37,14 +37,14 @@ module.exports = {
   plugins: [
     new ModuleFederationPlugin({
       // TODO: configurer ce MFE pour exposer le composant Cart
-      name: "mfeCart",
-      filename: "remoteEntry.js",
+      name:'mfeCart',
+      filename: 'remoteEntry.js',
       exposes: {
-        "./Cart": "./src/components/Cart",
+        './Cart': './src/components/Cart',
       },
       shared: {
-        react: { singleton: true, requiredVersion: "^18.2.0" },
-        "react-dom": { singleton: true, requiredVersion: "^18.2.0" },
+        react: { singleton: true, requiredVersion: '^18.2.0' },
+        'react-dom': { singleton: true, requiredVersion: '^18.2.0' },
       },
     }),
     new HtmlWebpackPlugin({
