@@ -23,10 +23,12 @@ function App() {
 
     const onTotalCart = (e) => {
       console.log("Total panier :", e.detail);
+      setCartCount(e.detail);
     };
 
-    const onDeleteCart = (e) => {
+    const onDeleteCart = () => {
       console.log("Panier supprimé");
+      setCartCount(0);
     };
 
     window.addEventListener("add-product", onAddProduct);
