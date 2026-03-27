@@ -46,6 +46,7 @@ module.exports = {
       remotes: {
         mfeProduct: "mfeProduct@http://localhost:3001/remoteEntry.js",
         mfeCart: "mfeCart@http://localhost:3002/remoteEntry.js",
+        mfeReco: "mfeReco@http://localhost:3003/remoteEntry.js",
       },
       shared: {
         react: { singleton: true, requiredVersion: "^18.2.0" },
