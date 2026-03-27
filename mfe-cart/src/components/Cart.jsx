@@ -9,17 +9,32 @@ function Cart() {
 
   useEffect(() => {
     // TODO: ecouter les ajouts de produits et mettre a jour le state
-  }, []);
+    const handler = (product) => {
+     setItems((prevItems) => [...prevItems, { ...product, cartId: crypto.randomUUID() }]);
+
+  };
+
+  eventBus.on('add-product', handler);
+
+  return () => {
+    eventBus.off('add-product', handler); e
+  };
+}, []);
 
   useEffect(() => {
     // TODO: notifier le reste de l'application quand le panier change
+    eventBus.emit('total-cart', total);
   }, [items]);
 
+
   const handleRemove = (cartId) => {
+    eventBus.emit('remove-cart', cartId);
     setItems(prev => prev.filter(item => item.cartId !== cartId));
+    console.log("Produit retiré du panier :", cartId);
   };
 
   const handleClear = () => {
+    eventBus.emit('clear-cart');
     setItems([]);
   };
 
