@@ -75,9 +75,14 @@ Si ca casse : F12, identifier le probleme.
 
 # Validation :
 
-[ ] Les 4 services demarrent sans erreur
-[ ] Cliquer "Ajouter" dans le catalogue ajoute l'article au panier
-[ ] Le badge du header affiche le bon nombre
-[ ] Les recommandations changent selon le contenu du panier
-[ ] Vider le panier remet tout a zero
-[ ] Tuer mfe-reco (Ctrl+C) ne casse pas le reste de la page
+- [ ] Les 4 services demarrent sans erreur
+
+- [ ] Cliquer "Ajouter" dans le catalogue ajoute l'article au panier
+
+- [ ] Le badge du header affiche le bon nombre
+
+- [ ] Les recommandations changent selon le contenu du panier
+
+- [ ] Vider le panier remet tout a zero*
+
+- [ ] Tuer mfe-reco (Ctrl+C) ne casse pas le reste de la page
